@@ -1,4 +1,4 @@
-module github.com/omri/jean
+module github.com/omriza/jean
 
 go 1.25.5
 

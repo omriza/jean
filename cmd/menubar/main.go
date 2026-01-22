@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/caseymrm/menuet"
-	"github.com/omri/jean/internal/api"
-	"github.com/omri/jean/internal/auth"
+	"github.com/omriza/jean/internal/api"
+	"github.com/omriza/jean/internal/auth"
 )
 
 var (

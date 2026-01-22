@@ -5,9 +5,9 @@ import (
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/omri/jean/internal/api"
-	"github.com/omri/jean/internal/auth"
-	"github.com/omri/jean/internal/tui"
+	"github.com/omriza/jean/internal/api"
+	"github.com/omriza/jean/internal/auth"
+	"github.com/omriza/jean/internal/tui"
 )
 
 func main() {
