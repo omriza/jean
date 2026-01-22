@@ -12,28 +12,13 @@ A macOS menu bar app that shows your Claude usage limits in real-time.
 - **No manual token management** - Reads credentials directly from Claude Desktop
 - **Detailed breakdown** - Click to see current session + weekly limits
 
-## Screenshot
+## Screenshots
 
-```
-Menu Bar:  C ▰▱▱▱▱ 10%
+### Menu Bar
+![Menu Bar](assets/menubar.png)
 
-Dropdown:
-┌─────────────────────────────┐
-│ Current Session             │
-│    ▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱ 10%     │
-│    Resets in 4h 13m         │
-│                             │
-│ Weekly Limits               │
-│    All Models: ▰▱▱▱▱▱▱▱▱▱ 3%│
-│    Resets Thu 7:59 AM       │
-│    Sonnet: ▱▱▱▱▱▱▱▱▱▱ 0%    │
-│    Resets now               │
-│                             │
-│ Updated: 10:46 PM           │
-│ Refresh Now                 │
-│ Quit Jean                   │
-└─────────────────────────────┘
-```
+### Terminal UI
+![Terminal UI](assets/tui.png)
 
 ## Requirements
 
@@ -46,10 +31,16 @@ Dropdown:
 ### From Source
 
 ```bash
-git clone https://github.com/yourusername/jean.git
+git clone https://github.com/omriza/jean.git
 cd jean
-go build -o jean-menubar ./cmd/menubar
-./jean-menubar
+make build
+./bin/jean-menubar
+```
+
+### Using Go Install
+
+```bash
+go install github.com/omriza/jean/cmd/menubar@latest
 ```
 
 ### First Run
@@ -94,17 +85,16 @@ Jean reads your Claude session credentials directly from Claude Desktop's cookie
 
 ```
 jean/
-├── main.go                      # TUI version entry point
 ├── cmd/
-│   └── menubar/
-│       └── main.go              # Menu bar version entry point
+│   ├── menubar/main.go          # Menu bar version
+│   └── tui/main.go              # Terminal UI version
 ├── internal/
-│   ├── auth/
-│   │   └── cookie.go            # Claude Desktop cookie decryption
-│   ├── api/
-│   │   └── usage.go             # Claude API client
-│   └── tui/
-│       └── model.go             # Terminal UI (bubbletea)
+│   ├── auth/cookie.go           # Claude Desktop cookie decryption
+│   ├── api/usage.go             # Claude API client
+│   └── tui/model.go             # Terminal UI (bubbletea)
+├── assets/                      # Screenshots
+├── docs/ROADMAP.md              # Detailed roadmap
+├── Makefile                     # Build automation
 ├── go.mod
 └── README.md
 ```
@@ -114,7 +104,9 @@ jean/
 ### Menu Bar App (Recommended)
 
 ```bash
-./jean-menubar
+make run
+# or
+./bin/jean-menubar
 ```
 
 Runs in the background. Click the menu bar icon to see details, or "Quit Jean" to exit.
@@ -122,10 +114,19 @@ Runs in the background. Click the menu bar icon to see details, or "Quit Jean" t
 ### Terminal UI
 
 ```bash
-./jean
+make run-tui
+# or
+./bin/jean
 ```
 
 Full-screen terminal interface with live updates. Press `r` to refresh, `q` to quit.
+
+### Development
+
+```bash
+make dev    # Rebuild and restart menu bar app
+make help   # Show all available commands
+```
 
 ## Troubleshooting
 
@@ -155,17 +156,15 @@ Full-screen terminal interface with live updates. Press `r` to refresh, `q` to q
 - [x] Progress bar visualization
 
 ### v0.2 (Beta)
+- [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Code cleanup and simplification
-- [ ] Configuration file support (~/.jean/config.yaml)
+- [ ] Configuration file support
 - [ ] Customizable refresh interval
 - [ ] Customizable progress bar style
 - [ ] Start at login option
 
 ### v0.3 (Release)
-- [ ] GitHub repository setup
-- [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Homebrew formula
-- [ ] DMG installer
 - [ ] Code signing & notarization
 
 ### v1.0 (Stable)
@@ -198,11 +197,11 @@ The encrypted cookie format is: `v10` prefix (3 bytes) + AES-CBC ciphertext.
 
 ## Contributing
 
-Contributions welcome! Please read the contributing guidelines (coming soon).
+Contributions welcome! Contributing guidelines coming soon.
 
 ## License
 
-MIT License (coming soon)
+MIT
 
 ## Acknowledgments
 
